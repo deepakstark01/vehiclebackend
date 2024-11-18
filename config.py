@@ -3,6 +3,7 @@ from datetime import timedelta
 from dotenv import load_dotenv
 load_dotenv()
 class Config:
+    VALID_CLIENT_IDS = ['web-client', 'mobile-client']
     # Basic Flask config
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'your-secret-key-for-development'
     DEBUG = False

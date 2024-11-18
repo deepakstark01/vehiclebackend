@@ -10,6 +10,8 @@ class User:
         self.last_name = last_name
         self.username = username
         self.email = email
+        self.plan = "free"  # Default plan
+        self.plan_expiry = None
         self.password_hash = generate_password_hash(password) if password else None
         self.created_at = datetime.utcnow()
         self.full_name = f"{first_name} {last_name}"
@@ -28,6 +30,8 @@ class User:
             "full_name": self.full_name,
             "username": self.username,
             "email": self.email,
+            "plan": self.plan,
+            "plan_expiry": self.plan_expiry.isoformat() if self.plan_expiry else None,
             "created_at": self.created_at.isoformat(),
             "role": self.role,
             "is_active": self.is_active,

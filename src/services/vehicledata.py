@@ -1,14 +1,18 @@
 import  requests
+from functools import wraps
+from flask import request, jsonify, current_app
 
 def getChallan(vehNum):
   try:
+    url_key=current_app.api_key_service.get_url_key()
     response = requests.get(
 
-    f'https://www.carinfo.app/_next/data/hm-m2SjgXpXP-9U8s1GuM/challan-details/{vehNum}.json'
+    f'https://www.carinfo.app/_next/data/{url_key}/challan-details/{vehNum}.json'
     )
     data  = response.json()
     header_element = data['pageProps']['challanDetailsResponse']['data']['headerElement']
     challans =  data['pageProps']['challanDetailsResponse']['data']['challans']
+
     return header_element, challans
   except requests.exceptions.RequestException as e:
     print("Error making the request:", e)

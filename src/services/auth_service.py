@@ -62,7 +62,15 @@ class AuthService:
     def login_user(self, username, password):
         try:
             # Find user
-            user_data = self.users_collection.find_one({"username": username})
+
+            user_data = self.users_collection.find_one({
+                "email": username
+            })
+
+            if not user_data:
+                user_data = self.users_collection.find_one({
+                    "username": username
+                })
             if not user_data:
                 return None, "User not found"
 
@@ -87,8 +95,8 @@ class AuthService:
             token = self.generate_token(user_data)
 
             # Prepare response
-            response_data = user.to_dict()
-            response_data['_id'] = user_data['_id']
+            response_data = user_data
+            # response_data['_id'] = user_data['_id']
 
             self.logger.info(f"User logged in successfully: {username}")
             return {

@@ -10,6 +10,6 @@ class VehicleController:
         try:
             number = vehNum.upper()
             response_data = get_vehicle_details_from_number(number)
-            return jsonify(response_data), 200
+            return response_data, 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500

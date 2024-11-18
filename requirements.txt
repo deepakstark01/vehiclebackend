@@ -1,9 +1,11 @@
+Booktype~=1.5
 pymongo~=4.10.1
-werkzeug~=3.0.3
 typing~=3.7.4.3
+werkzeug~=3.0.3
 flask~=3.0.3
 requests~=2.22.0
 jwt~=1.3.1
 PyJWT~=2.10.0
 Flask-Cors~=5.0.0
 python-dotenv~=1.0.1
+load_dotenv

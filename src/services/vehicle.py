@@ -6,6 +6,7 @@ def get_vehicle_details_from_number(vehNum):
     data = ""
     onwer_name = ""
     # Prepare the response data
+
     if get_vehicle_details(vehNum) != "no":
         vdata = get_vehicle_details(vehNum)
         onwer_name = vdata['user']['name']
@@ -17,5 +18,4 @@ def get_vehicle_details_from_number(vehNum):
         'challans': challans,
         'vehicleDetails': data
     }
-
     return response_data

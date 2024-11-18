@@ -129,7 +129,9 @@ def get_vehicle():
             }), 400
 
         veh_num = data['veh_num']
-        return  vehicle_controller.get_vehicle_details(veh_num)
+        veh_data = vehicle_controller.get_vehicle_details(veh_num)
+        print(veh_data)
+        return veh_data
 
     except Exception as e:
 

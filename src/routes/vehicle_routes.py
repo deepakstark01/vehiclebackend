@@ -115,30 +115,44 @@ vehicle_controller = VehicleController()
 #         }), 400
 
 
+# @bp.route('/data', methods=['POST'])
+# # @token_required
+# def get_vehicle():
+#     """Get vehicle details from POST body"""
+#     try:
+#         data = request.get_json()
+#
+#         if not data or 'veh_num' not in data:
+#             return jsonify({
+#                 'status': 'error',
+#                 'message': 'Vehicle number is required in request body'
+#             }), 400
+#
+#         veh_num = data['veh_num']
+#         veh_data = vehicle_controller.get_vehicle_details(veh_num)
+#         print(veh_data)
+#         return veh_data
+#
+#     except Exception as e:
+#
+#         return jsonify({
+#             'status': 'error',
+#             'message': f'Invalid request: {str(e)}'
+#         }), 400
+
 @bp.route('/data', methods=['POST'])
-# @token_required
 def get_vehicle():
-    """Get vehicle details from POST body"""
     try:
         data = request.get_json()
-
         if not data or 'veh_num' not in data:
-            return jsonify({
-                'status': 'error',
-                'message': 'Vehicle number is required in request body'
-            }), 400
+            return jsonify({"error": "Vehicle number required"}), 400
 
-        veh_num = data['veh_num']
-        veh_data = vehicle_controller.get_vehicle_details(veh_num)
-        print(veh_data)
-        return veh_data
-
+        veh_data = vehicle_controller.get_vehicle_details(data['veh_num'])
+        if isinstance(veh_data, tuple):  # Error case
+            return jsonify(veh_data[0]), veh_data[1]
+        return jsonify(veh_data)
     except Exception as e:
-
-        return jsonify({
-            'status': 'error',
-            'message': f'Invalid request: {str(e)}'
-        }), 400
+        return jsonify({"error": str(e)}), 500
 
 
 @bp.route('/api/lookup', methods=['POST'])
